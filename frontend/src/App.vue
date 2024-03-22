@@ -1,26 +1,76 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <h1>CRUD Básico Vue.js + Flask</h1>
+    <input v-model="newItemName" placeholder="Novo item" />
+    <button @click="addItem">Adicionar</button>
+    <ul>
+      <li v-for="item in items" :key="item.id">
+        <input v-model="item.name" />
+        <button @click="updateItem(item)">Atualizar</button>
+        <button @click="deleteItem(item.id)">Excluir</button>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      items: [],
+      newItemName: ''
+    };
+  },
+  created() {
+    this.getItems();
+  },
+  methods: {
+    getItems() {
+      axios.get('http://localhost:5000/api/items')
+        .then(response => {
+          this.items = response.data;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    addItem() {
+      axios.post('http://localhost:5000/api/items', { name: this.newItemName })
+        .then(response => {
+          this.items.push(response.data);
+          this.newItemName = '';
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    updateItem(item) {
+      axios.put(`http://localhost:5000/api/items/${item.id}`, item)
+        .then(response => {
+          // Atualiza o item localmente após a atualização no servidor
+          Object.assign(item, response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    deleteItem(itemId) {
+      axios.delete(`http://localhost:5000/api/items/${itemId}`)
+        .then(() => {
+          this.items = this.items.filter(item => item.id !== itemId);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 </style>
