@@ -20,7 +20,7 @@
       };
     },
     created() {
-      this.getItems(); // Chamada do método getItems() no ciclo de vida created
+      this.getItems(); 
     },
     methods: {
       getItems() {
@@ -35,7 +35,7 @@
       updateItem(item) {
         axios.put(`http://localhost:5000/api/items/${item.id}`, item)
           .then(response => {
-            // Atualiza o item localmente após a atualização no servidor
+            
             Object.assign(item, response.data);
           })
           .catch(error => {
@@ -56,6 +56,6 @@
   </script>
   
   <style>
-  /* Estilos do componente */
+
   </style>
   
