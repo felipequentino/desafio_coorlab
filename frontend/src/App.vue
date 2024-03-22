@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h1>CB Viagens</h1>
+    <img alt="CB logo" src="../../doc/logo.png">
     <CityFilter />
     <ItemManagement />
   </div>
