@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <h1>CRUD Básico Vue.js + Flask</h1>
-    <input v-model="newItemName" placeholder="Novo item" />
+    <h1>CB Viagens</h1>
+    <CityFilter />
+    <ItemManagement />
     <button @click="addItem">Adicionar</button>
     <ul>
       <li v-for="item in items" :key="item.id">
@@ -15,8 +16,14 @@
 
 <script>
 import axios from 'axios';
+import CityFilter from './components/CityFilter.vue';
+import ItemManagement from './components/ItemManagement.vue';
 
 export default {
+  components: {
+    CityFilter,
+    ItemManagement
+  },
   data() {
     return {
       items: [],
@@ -65,7 +72,7 @@ export default {
           console.error(error);
         });
     }
-  }
+  },
 };
 </script>
 
