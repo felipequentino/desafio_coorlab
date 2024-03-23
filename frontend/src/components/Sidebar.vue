@@ -15,7 +15,7 @@
 
 <style scoped>
 .sidebar {
-    position: fixed; /* ou absolute */
+    position: fixed; 
     top: 0;
     bottom: 0;
     left: 0;
