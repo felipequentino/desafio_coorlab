@@ -1,4 +1,5 @@
 <template>
+<!-- Just a side bar -->
 <div class="sidebar">
     <img alt="CB logo" src="../../../doc/logo.png" class="sidebar-logo">
     <br><br>
