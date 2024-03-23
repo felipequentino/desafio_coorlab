@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # go to the backend directory
-cd /backend/
+cd ../backend/
 
 # Create a virtual environment
 python3 -m venv venv
@@ -13,7 +13,7 @@ source venv/bin/activate
 pip install flask flask-cors
 
 # Run the backend
-python3 app.py
+nohup python3 app.py &
 
 # go back to the frontend directory
 cd ../frontend/
