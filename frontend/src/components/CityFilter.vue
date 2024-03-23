@@ -34,8 +34,8 @@
         data() {
             return {
                 searchCity: null,
-                date: null, // Adicione esta linha
-                filteredItems: this.items // Inicialize filteredItems com todos os itens
+                date: null, 
+                filteredItems: this.items 
             };
         },
         computed: {
