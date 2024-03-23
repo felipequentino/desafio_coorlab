@@ -3,7 +3,9 @@
     <Sidebar />
     <div class="main-content">
       <h1 id="header">Calcule o valor da Viagem</h1>
+      <!-- Passing the parameters to each component -->
       <ItemManagement @itemAdded="updateItems" />
+      <!-- items is gived by $emit -->
       <CityFilter :items="items" />
     </div>
   </div>
@@ -25,11 +27,13 @@ export default {
     ItemManagement,
     Sidebar
   },
+  // data to store the items
   data() {
     return {
       items: [],
     };
   },
+  // get items when component is created
   methods: {
     updateItems(items) {
       this.items = items;
