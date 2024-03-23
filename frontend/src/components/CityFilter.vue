@@ -1,6 +1,7 @@
 <template>
     <div id="div-show">
       <p>Selecione o destino</p>
+      <!-- Dropdown to select city -->
       <Dropdown v-model="searchCity" :options="cities" optionLabel="name" placeholder="Selecione uma cidade" ></Dropdown>
       <p>Selecione a data</p>
       <Calendar v-model="date" :showIcon="true"></Calendar>
@@ -11,6 +12,7 @@
      </div>
       <br><br>
     </div>
+    <!-- Generate a card for each item return by the filter -->
     <div class="card-container">
         <ItemCard v-for="item in filteredItems" :key="item.id" :item="item" />
     </div>
@@ -30,7 +32,10 @@
             Button,
             ItemCard
         },
+        
         props: ['items'],
+
+        // data to store the selected city and date
         data() {
             return {
                 searchCity: null,
@@ -40,23 +45,26 @@
         },
         computed: {
             cities() {
+                // get all cities from items
                 const cities = this.items.map(item => ({ name: item.city, code: item.city }));
                 return [...new Set(cities.map(city => JSON.stringify(city)))].map(city => JSON.parse(city)); // remove duplicates cities
             }
         },
         methods: {
             search() {
+                // check if city and date are selected
                 if (!this.searchCity || !this.date) {
                     alert('Selecione a cidade e a data')
                     return;
                 }
-
+                // filter items by city
                 if (this.searchCity) {
                     this.filteredItems = this.items.filter(item => item.city === this.searchCity.name);
                 } else {
                     this.filteredItems = this.items;
                 }
             },
+            // clear search
             clear() {
                 this.searchCity = null;
                 this.date = null; 
