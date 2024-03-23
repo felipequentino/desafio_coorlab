@@ -1,4 +1,5 @@
 <template>
+  <!-- Card model, used by CityFilter -->
   <div class="item-card">
     <h2>{{ item.name }}</h2>
     <p>{{ item.city }}</p>
